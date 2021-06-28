@@ -1,0 +1,22 @@
+{
+    "name": "enigma972/orange-api-client",
+    "description": "Orange APIs Client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joel Lusavuvu",
+            "email": "lusavuvujoel39@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/http-client": "^5.3",
+        "symfony/cache": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "OrangeApiClient\\": "src/"
+        }
+    }
+}
