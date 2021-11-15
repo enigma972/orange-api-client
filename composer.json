@@ -1,7 +1,12 @@
 {
     "name": "enigma972/orange-api-client",
-    "description": "Orange APIs Client",
+    "description": "PHP SDK for Orange APIs Client with Token Caching",
     "type": "library",
+    "keywords": [
+        "php", "api", "sms", "client", "http client", "json", "requests", "rest", 
+        "restful", "web service", "orange", "cache"
+    ],
+	"homepage": "https://github.com/enigma972/orange-api-client",
     "license": "MIT",
     "authors": [
         {

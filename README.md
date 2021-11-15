@@ -6,61 +6,57 @@ Orange APIs Client with Token Caching
 You need to have composer installed in your computer before doing this
 
 ```bash
-composer require informagenie/orange-sms
+composer require enigma972/orange-api-client
 ```
 
-## Quick setup
+## Quick setup and Basic example (SMS)
 
-Get `client_id` and `client_secret` [here](https://developer.orange.com/myapps/) or [follow guide](https://informagenie.com/3141/envoyer-sms-orange-sms-api/)
+Get `client_id` and `client_secret` [here](https://developer.orange.com/myapps/)
+
+All examples [here](https://github.com/enigma972/orange-api-client/tree/main/examples/Sms)
 
 ```php
 <?php
-    require_once __DIR__.'/vendor/autoload.php';
+require_once './../../vendor/autoload.php';
 
-    use Informagenie\OrangeSDK;
+use OrangeApiClient\Service\Sms\Sms;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use OrangeApiClient\Client;
+use OrangeApiClient\Service\Sms\Message;
 
-    $credentials = [
-        'client_id' => 'your_client_id',
-        'client_secret' => 'your_client_secret'
-    ];
+$cache = new FilesystemAdapter();
+$client = new Client($cache, 'YOUR-CLIENT-ID', 'YOUR-CLIENT-SECRET');
 
-    /*
-       You can use directly authorization header instead of client_id and client_secret
-       $credentials = [
-           'authorization_header' => 'Basic xxx...',
-       ];
-     */
+$sms = new Sms($client);
 
-    $sms = new OrangeSDK($credentials);
+$message = new Message();
+$message
+    ->content('Hello world, via Orange SMS API.')
+    ->from(243899999999)
+    ->as('Enigma972')
+    ->to(243899999999)
+    ;
 
-    $response = $sms->message('Hello world !')
-        ->from(243820000000)       // Sender phone's number
-        ->as('Informagenie')      // Sender's name (optional)
-        ->to(2439000000000)      // Recipiant phone's number
-        ->send();
+$response = $sms->doSend($message);
+
+dd($response->toArray());
 
 ```
 If all is ok, $response should be like this :
 
 ```
-stdClass Object
-(
-    [outboundSMSMessageRequest] => stdClass Object
-        (
-            [address] => Array
-                (
-                    [0] => tel:+243900000000
-                )
-
-            [senderAddress] => tel:+243820000000
-            [senderName] => Informagenie
-            [outboundSMSTextMessage] => stdClass Object
-                (
-                    [message] => Hello World
-                )
-
-            [resourceURL] => https://api.orange.com/smsmessaging/v1/outbound/tel:+243820000000/requests/9d523078-1d3d-4c90-8984-7216e18deb97
-        )
-
-)
+^ array:1 [▼
+  "outboundSMSMessageRequest" => array:4 [▼
+    "address" => array:1 [▼
+      0 => "tel:+243899999999"
+    ]
+    "senderAddress" => "tel:+243899999999"
+    "outboundSMSTextMessage" => array:1 [▼
+      "message" => "Hello world, via Orange SMS API."
+    ]
+    "resourceURL" => "https://api.orange.com/smsmessaging/v1/outbound/tel:+243899999999/requests/2fdd2d6e-c155-43d3-97ef-1dce0dc648d5"
+  ]
+]
 ```
+
+Also read [here](https://github.com/ismaeltoe/osms) and [here](https://github.com/informagenie/orange-sms).
