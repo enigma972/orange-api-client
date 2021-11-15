@@ -59,4 +59,4 @@ If all is ok, $response should be like this :
 ]
 ```
 
-Also read [here](https://github.com/ismaeltoe/osms) and [here](https://github.com/informagenie/orange-sms).
+Also read [ismaeltoe/osms](https://github.com/ismaeltoe/osms) and [informagenie/orange-sms](https://github.com/informagenie/orange-sms).
