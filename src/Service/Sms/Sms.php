@@ -4,7 +4,7 @@ namespace OrangeApiClient\Service\Sms;
 
 use OrangeApiClient\Client;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use OrangeApiClient\service\AbstractAuthenticatedService;
+use OrangeApiClient\Service\AbstractAuthenticatedService;
 
 
 /**
