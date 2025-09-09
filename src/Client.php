@@ -46,14 +46,20 @@ class Client
      * @param string $clientId
      * @param string $clientSecret
      * @param string $host
+     * @param HttpClientInterface|null $httpClient
      */
-    public function __construct(CacheInterface $cache, string $clientId = '', string $clientSecret = '', string $host = 'https://api.orange.com')
-    {
+    public function __construct(
+        CacheInterface $cache,
+        string $clientId = '', 
+        string $clientSecret = '',
+        string $host = 'https://api.orange.com',
+        HttpClientInterface $httpClient = null
+    ) {
         $this->cache = $cache;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->host = $host;
-        $this->httpClient = HttpClient::create();
+        $this->httpClient = null === $httpClient ? HttpClient::create() : $httpClient;
     }
 
     /**
