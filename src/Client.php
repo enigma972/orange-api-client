@@ -52,8 +52,8 @@ class Client
         CacheInterface $cache,
         string $clientId = '', 
         string $clientSecret = '',
+        HttpClientInterface $httpClient = null,
         string $host = 'https://api.orange.com',
-        HttpClientInterface $httpClient = null
     ) {
         $this->cache = $cache;
         $this->clientId = $clientId;
